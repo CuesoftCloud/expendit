@@ -2,7 +2,6 @@ import { API } from '../axiosSetup';
 import { ExpenseProps } from '../types';
 import { getLocalStorageItem } from '@/utils/localStorage';
 import {
-  getAreaHomeChartApi,
   getBarChartApi,
   getLineChartApi,
   getPieChartApi

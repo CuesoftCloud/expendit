@@ -1,14 +1,4 @@
 services:
-  envoy:
-    build: ./App/envoy
-    ports:
-      - '9901:9901'
-      - '8080:8080'
-      - '9090:9090'
-    networks:
-      - next-envoy
-      - envoy-go
-
   app-frontend:
     build:
       context: ./App
@@ -18,6 +8,8 @@ services:
     volumes:
       - ./App:/app
     restart: always
+    depends_on:
+      - backend
     networks:
       - next-envoy
   
@@ -31,18 +23,14 @@ services:
       - ./Home:/app
     restart: always
 
+  backend:
+    build: ./CommonServer
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./CommonServer/.env 
+
 networks:
   next-envoy:
   envoy-go:
   go-db:
-
-Backend:
-
-version: "3"
-backend-service:
-  app:
-    build: .
-    ports:
-      - "9000:9000"
-    env_file:
-      - .env 

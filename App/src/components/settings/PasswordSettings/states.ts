@@ -5,12 +5,16 @@ import { passwordChangeProps } from './types';
 import { passwordChangeApi } from '@/API/APIS/authApi';
 import { formatPasswordChange, passwordRequiredFields } from '@/utils/formatPasswordChange';
 import { PasswordPayload } from '@/API/types';
+import { useHomeContext } from '@/context';
 
 
 export const usePasswordCustomState = () => {
-  const [formError, setFormError] = useState("");
-  const [formSuccess, setFormSuccess] = useState("");
-  const [formLoading, setFormLoading] = useState(false);
+  const {
+    formLoading,
+    setFormLoading,
+    setFormError,
+    setFormSuccess
+  } = useHomeContext();
 
   const initialForm: passwordChangeProps = {
     old_password: "",
@@ -18,11 +22,11 @@ export const usePasswordCustomState = () => {
     confirm_password: ""
   };
 
-  const [ form, setForm ] = useState<passwordChangeProps>(initialForm);
+  const [form, setForm] = useState<passwordChangeProps>(initialForm);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({...prev, [name]: value}))
+    setForm((prev) => ({ ...prev, [name]: value }))
   };
 
   const handleCancel = (e: FormEvent<HTMLButtonElement>) => {
@@ -31,36 +35,18 @@ export const usePasswordCustomState = () => {
     setForm(initialForm);
   }
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      if (formError !== "") {
-        setFormLoading(false);
-        setFormError("");
-      }
-
-      if (formSuccess !== "") {
-        setFormLoading(false);
-        setFormSuccess("");
-      }
-    }, 5000);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [formLoading, formError, formSuccess]);
-
   const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if(formLoading) return;
+    if (formLoading) return;
     setFormLoading(true);
 
     const completeForm = formatPasswordChange(form);
     const isAnyRequiredFieldEmpty = passwordRequiredFields.some(
-      (field) =>!completeForm[field as keyof PasswordPayload],
+      (field) => !completeForm[field as keyof PasswordPayload],
     );
 
-    if(isAnyRequiredFieldEmpty) {
+    if (isAnyRequiredFieldEmpty) {
       setFormError("Please fill out all fields!");
       setFormLoading(false);
       return;
@@ -78,10 +64,10 @@ export const usePasswordCustomState = () => {
       return;
     }
 
-    await passwordChangeApi({ 
-      completeForm, 
-      setFormError, 
-      setFormSuccess, 
+    await passwordChangeApi({
+      completeForm,
+      setFormError,
+      setFormSuccess,
       setFormLoading,
     });
 
@@ -91,8 +77,6 @@ export const usePasswordCustomState = () => {
 
   return {
     form,
-    formError,
-    formSuccess,
     formLoading,
     handleChange,
     handleSubmit,

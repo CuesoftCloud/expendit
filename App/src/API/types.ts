@@ -36,7 +36,7 @@ export interface SignInProps {
 
 export interface LogoutProps {
   router: AppRouterInstance;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setFormLoading: Dispatch<SetStateAction<boolean>>;
 };
 
 // ---- Income Types ----
@@ -67,8 +67,9 @@ export interface PasswordChangeProps {
 };
 
 export interface PasswordPayload {
-  OldPassword: string;
-  NewPassword: string;
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
 }
 
 // ---- Expense Types ----
@@ -95,12 +96,17 @@ export interface UserDetailsProps {
   setFormError: Dispatch<SetStateAction<string>>;
   setFormSuccess: Dispatch<SetStateAction<string>>;
   setFormLoading: Dispatch<SetStateAction<boolean>>;
+  setUser: Dispatch<SetStateAction<boolean>>;
 };
 
 export interface UserDetailsPayload {
-  FirstName: string;
-  LastName: string;
-  Email: string;
+  first_name: string;
+  last_name: string;
+  email?: string;
+  phone?: string;
+  password?: string | null;
+  user_type?: string;
+  updated_at?: string;
 };
 
 

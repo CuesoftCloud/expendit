@@ -60,25 +60,25 @@ export const signInApi = async ({
       router.push('/');
 
     }
-  } catch (error) {
-    setFormError("an error occurred, try again");
+  } catch (error: any) {
+    setFormError(error.response.data.error);
     setFormLoading(false);
   }
 };
 
-export const logoutApi = async ({ router, setIsLoading }: LogoutProps) => {
+export const logoutApi = async ({ router, setFormLoading }: LogoutProps) => {
   try {
-    setIsLoading(true);
+    setFormLoading(true);
     router.push("/signin");
 
     localStorage.removeItem("Expendit-token");
     localStorage.removeItem("Expendit-user");
     localStorage.removeItem("Expendit-userID");
     localStorage.removeItem("ExpenditLoggedIn");
-    setIsLoading(false);
+    setFormLoading(false);
   } catch (error) {
     console.log(error);
-    setIsLoading(false);
+    setFormLoading(false);
   }
 };
 
@@ -91,7 +91,7 @@ export const passwordChangeApi = async ({
 
   try {
     const payload = JSON.stringify(completeForm)
-    const { data, status } = await API.post('/users/change-password', payload);
+    const { data, status } = await API.put('/users/change-password', payload);
 
     if (data && status === 200) {
       setFormSuccess("Successful!");

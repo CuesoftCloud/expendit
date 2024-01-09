@@ -11,10 +11,15 @@ SetStateAction
 } from "react";
 
 import { getIncomeApi } from '../API/APIS/incomeApi';
-import { getBarChartApi, getAreaHomeChartApi, getPieChartApi, getLineChartApi } from '../API/APIS/reportApi';
 import { getCategoryApi } from '../API/APIS/categoryApi';
 import { getExpenseApi, getMonthlyExpenseApi } from '../API/APIS/expenseApi';
 import { getLocalStorageItem } from '@/utils/localStorage';
+import { 
+getBarChartApi, 
+getAreaHomeChartApi, 
+getPieChartApi, 
+getLineChartApi 
+} from '../API/APIS/reportApi';
 
 
 export interface HomeContextProps {

@@ -16,7 +16,7 @@ const EmailInput: React.FC<EmailInputProps> = ({ handleNext }) => {
     <section className={styles.container}>
       <div>
         <h1 className={styles.heading}>Forgot your password?</h1>
-        <p>Enter the email associated with your account and we'll send an email with instructions to reset your password</p>
+        <p>Enter the email associated with your account and we&apos;ll send an email with instructions to reset your password</p>
         <Input
           label="Email address"
           name="email"

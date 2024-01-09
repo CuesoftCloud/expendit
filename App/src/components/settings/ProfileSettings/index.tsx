@@ -3,24 +3,22 @@ import Avatar from '@/assets/images/avatar.jpg';
 import Image from 'next/image';
 import styles from './styles';
 import Input from '@/components/signup/Input';
-import { userDetailsCustomState } from './states';
+import { useDetailsCustomState } from './states';
 import LoaderSpinner from '@/components/helpers/LoaderSpinner';
 
-const index = () => {
+const Index = () => {
   const {
     form,
-    formError,
-    formSuccess,
     formLoading,
     handleChange,
     handleSubmit,
     handleCancel,
-  } = userDetailsCustomState()
+  } = useDetailsCustomState()
   return (
     <div className={styles.pagePad}>
       <section>
         <div className={styles.introContainer}>
-          <div>
+          <div className={styles.selfcenter}>
             <h1 className={styles.semibold}>Personal Info</h1>
             <p className={styles.introParagraph}>Update your photo and personal details here</p>
           </div>
@@ -62,25 +60,6 @@ const index = () => {
               handleChange={handleChange}
               custom
             />
-            {/* <input className={styles.input} placeholder='first name'/>
-            <input className={styles.input} placeholder='last name'/> */}
-          </div>
-        </div>
-        <div className={styles.emailContainer}>
-          <div>
-            <p className={styles.semibold}>Email</p>
-          </div>
-          <div className={styles.emailInputContainer}>
-            <Input
-              name= 'email'
-              type= 'email'
-              label= ''
-              value= {form.email}
-              placeholder='Enter Email'
-              handleChange={handleChange}
-              custom
-            />
-            {/* <input className={styles.emailInput} placeholder='abdulsamad.raji@cuesoft.io'/> */}
           </div>
         </div>
         <div className={styles.section}>
@@ -105,4 +84,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index
