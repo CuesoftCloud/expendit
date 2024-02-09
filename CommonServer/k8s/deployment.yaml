@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expendit-app-deployment
+spec:
+  replicas: 2 # Number of replicas
+  selector:
+    matchLabels:
+      app: expendit # Shared label
+  template:
+    metadata:
+      labels:
+        app: expendit # Shared label
+    spec:
+      containers:
+        - name: expendit-fe
+          image: cuesoft/expendit-fe:latest # Update with your image
+          ports:
+            - containerPort: 9000
+              protocol: TCP
