@@ -36,3 +36,4 @@ next-env.d.ts
 
 
 .eslintcache
+Deploy/secrets.tfvars

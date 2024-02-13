@@ -1,0 +1,17 @@
+replicaCount: 1
+containerPort: 80
+
+image:
+  repository: iferrum/storefront-frontend:latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: http
+  # The service type is a LoadBalancer so that we can access it from the browser
+  # type: LoadBalancer
+  type: NodePort
+  nodePort: 30080
+  name: http
+  protocol: TCP
+

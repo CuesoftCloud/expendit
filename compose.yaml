@@ -1,5 +1,5 @@
 services:
-  app-frontend:
+  expendit-frontend:
     build:
       context: ./App
       target: development
@@ -9,11 +9,11 @@ services:
       - ./App:/app
     restart: always
     depends_on:
-      - backend
+      - expendit-backend
     networks:
       - next-envoy
   
-  home:
+  expendit-home:
     build:
       context: ./Home
       target: development
@@ -23,7 +23,7 @@ services:
       - ./Home:/app
     restart: always
 
-  backend:
+  expendit-backend:
     build: ./CommonServer
     ports:
       - "9000:9000"

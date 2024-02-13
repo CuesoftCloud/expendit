@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ .Release.Name }}
+  labels:
+    # replaces this value with the chart name
+    app: {{ .Release.Name }}
+spec:
+  # this gets the value of replicas from the values.yaml file
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          # gets the image repository value from the values.yaml file
+          image: {{ .Values.image.repository }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              # containerPort: 80
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
